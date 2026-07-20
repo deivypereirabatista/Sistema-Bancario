@@ -5,14 +5,17 @@ class ClinteService:
     def create(cliente: Cliente):
         ClienteRepository.create(cliente)
 
-    def find_all():
+    def find_all(): 
         ClienteRepository.find_all()
 
     def find_by_nome(nome:str):
         ClienteRepository.find_by_nome(nome)
 
     def update(novo_cliente: Cliente, nome: str):
-        pass
+        ClienteRepository.update(nome)
+
+    def delete(nome: str):
+        ClienteRepository.delete(nome)
 
 
 
