@@ -17,3 +17,7 @@ class ClinteService:
 
     def delete(nome: str):
         ClienteRepository.delete(nome)
+
+
+class ContaService:
+    pass

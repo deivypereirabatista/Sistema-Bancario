@@ -59,9 +59,12 @@ def iniciar():
                 ))
             
 
-
         if escolha == 5:
-            ClinteService.delete()
+            nome_titular = input('Digite o nome do Titular da conta: ')
+            if nome_titular:
+                ClinteService.delete(nome_titular)
+            else:
+                print('Cliente não encontrado.')
 
         if escolha == 6: 
             break
