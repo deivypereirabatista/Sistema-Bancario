@@ -45,11 +45,24 @@ def iniciar():
 
                 
         if escolha == 4:
-            ClinteService.update()
+            nome_titular = input('Digite o nome do Titular: ')
+            if nome_titular:
+                novo_nome = input('Digite um novo Nome: ')
+                novo_cpf = input('Digite o novo CPF: ')
+                novo_data_nascimento = input('Digite a nova Data de Nascimento: ')
+                novo_endereco = input('Digite o novo Endereço: ')
+                ClinteService.update(nome, Cliente(
+                    nome=novo_nome,
+                    cpf=novo_cpf,
+                    data_nascimento=novo_data_nascimento,
+                    endereco=novo_endereco
+                ))
+            
+
 
         if escolha == 5:
             ClinteService.delete()
-            
+
         if escolha == 6: 
             break
 

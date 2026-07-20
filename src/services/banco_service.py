@@ -9,16 +9,11 @@ class ClinteService:
     def find_all(): 
         return ClienteRepository.find_all()
         
-
     def find_by_nome(nome:str):
-        return  ClienteRepository.find_by_nome(nome)
-        
+        return ClienteRepository.find_by_nome(nome)
 
     def update(novo_cliente: Cliente, nome: str):
-        ClienteRepository.update(nome)
+        ClienteRepository.update(nome, novo_cliente)
 
     def delete(nome: str):
         ClienteRepository.delete(nome)
-
-
-
