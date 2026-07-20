@@ -20,3 +20,4 @@ class ContaRepository:
         for index, conta in enumerate(contas):
             if conta.numero == numero:
                 contas.pop(index)
+
