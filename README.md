@@ -288,9 +288,9 @@ Criar um sistema bancário funcional aplicando corretamente os fundamentos de Pr
 
 # Progresso
 
-- [ ] Criar classe Cliente
-- [ ] Criar classe Conta
-- [ ] Criar classe Banco
+- [X] Criar classe Cliente
+- [X] Criar classe Conta
+- [X] Criar classe Banco
 - [ ] Implementar criação de contas
 - [ ] Implementar depósito
 - [ ] Implementar saque
