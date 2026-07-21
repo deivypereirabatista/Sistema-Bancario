@@ -9,7 +9,7 @@ class ContaRepository:
     def find_all():
         return contas
 
-    def find_by_nome(numero: str):
+    def find_by_numero(numero: str):
         for conta in contas:
             if conta.numero == numero:
                 return conta
@@ -20,4 +20,3 @@ class ContaRepository:
         for index, conta in enumerate(contas):
             if conta.numero == numero:
                 contas.pop(index)
-
