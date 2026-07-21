@@ -1,6 +1,7 @@
-from services.banco_service import ClinteService
+from services.banco_service import ClinteService, ContaService
 from models.cliente import Cliente
-from database.banco import gerar_numero_conta
+from models.conta import Conta
+from database.banco import gerar_numero_conta, gerar_agencia_conta
 
 
 def menu_inicial():
@@ -97,9 +98,28 @@ def iniciar():
                 exibir_menu_conta()
 
                 if escolha == 1:
-                    numero = gerar_numero_conta()
-                    
+                    nome_titular = input('Digite o nome do Titular: ')
+                    cliente_encontrado = None                  
+                    for cliente in clientes:
+                        if cliente.nome == nome_titular:
+                            cliente_encontrado = cliente
+                            break
 
+                    if cliente_encontrado:
+                        numero = gerar_numero_conta()
+                        agencia = gerar_agencia_conta()
+                        conta = Conta(
+                            numero=numero,
+                            agencia=agencia,
+                            cliente=cliente_encontrado
+                        )
+                        ContaService.create(conta)
+                    else:
+                        print('Necessário realizar o cadastro de Clinte antes de abrir a conta!')
+                        break
+
+                if escolha == 2:
+                    pass
         
         if escolha_inical == 4:
             break
