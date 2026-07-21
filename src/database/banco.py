@@ -15,3 +15,8 @@ def gerar_numero_conta():
     proximo_numero_conta += 1
 
     return numero
+
+def gerar_agencia_conta():
+    return 1010
+
+    
