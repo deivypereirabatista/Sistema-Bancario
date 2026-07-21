@@ -4,7 +4,7 @@ from database.banco import contas
 class ContaRepository:
 
     def create(conta: Conta):
-        conta.append(conta)
+        contas.append(conta)
 
     def find_all():
         return contas
