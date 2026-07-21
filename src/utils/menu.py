@@ -6,13 +6,13 @@ from database.banco import gerar_numero_conta, gerar_agencia_conta
 
 def menu_inicial():
     print("==========Sistema Bancário==========")
-    print("Digite 1 para Criar Cadastro: ")
-    print("Digite 2 para Criar Conta: ")
-    print("Digite 3 para Realizar Transações: ")
+    print("Digite 1 para Cadastros: ")
+    print("Digite 2 para Contas: ")
+    print("Digite 3 para Transações: ")
     print("Digite 4 para Sair: ")
 
 def exibir_menu_cliente():
-    
+    print("==========CADASTROS==========")
     print("Digite 1 para Criar Cadastro: ")
     print("Digite 2 para Listar Todas os Cliente: ")
     print("Digite 3 para Listar por Nome: ")
@@ -21,7 +21,7 @@ def exibir_menu_cliente():
     print("Digite 6 para Sair: ")
 
 def exibir_menu_conta():
-    
+    print("==========CONTAS==========")
     print("Digite 1 para Criar Conta: ")
     print("Digite 2 para Listar Todas os Contas: ")
     print("Digite 3 para Listar por Numero da Conta: ")
@@ -37,9 +37,9 @@ def iniciar():
             while True:
                 exibir_menu_cliente()
 
-                escolha = int(input('Deigite o número correspondente a ação: '))
+                escolha_cliente = int(input('Deigite o número correspondente a ação: '))
 
-                if escolha == 1:
+                if escolha_cliente == 1:
                     nome = input('Digite o Nome do Titular da conta: ')
                     cpf = input('Digite o CPF do Titular da conta: ')
                     data_nascimento = input('Digite a Data de Nascimento do Titular da conta: ')
@@ -52,13 +52,13 @@ def iniciar():
                         endereco=endereco
                     ))
 
-                if escolha == 2:
+                if escolha_cliente == 2:
                     clientes = ClinteService.find_all()
 
                     for cliente in clientes:
                         print(cliente)
                     
-                if escolha == 3:
+                if escolha_cliente == 3:
                     nome = input('Digite o nome do Titular da conta: ')
                     cliente = ClinteService.find_by_nome(nome)
                     if cliente:
@@ -67,7 +67,7 @@ def iniciar():
                         print('Cliente não econtrado.')
 
                         
-                if escolha == 4:
+                if escolha_cliente == 4:
                     nome_titular = input('Digite o nome do Titular: ')
                     if nome_titular:
                         novo_nome = input('Digite um novo Nome: ')
@@ -82,22 +82,23 @@ def iniciar():
                         ))
                     
 
-                if escolha == 5:
+                if escolha_cliente == 5:
                     nome_titular = input('Digite o nome do Titular da conta: ')
                     if nome_titular:
                         ClinteService.delete(nome_titular)
                     else:
                         print('Cliente não encontrado.')
 
-                if escolha == 6: 
+                if escolha_cliente == 6: 
                     break
 
 
         if escolha_inical == 2:
             while True:
                 exibir_menu_conta()
+                escolha_conta = int(input('Digite o número correspondente a ação: '))
 
-                if escolha == 1:
+                if escolha_conta == 1:
                     nome_titular = input('Digite o nome do Titular: ')
                     cliente_encontrado = None                  
                     for cliente in clientes:
@@ -118,8 +119,18 @@ def iniciar():
                         print('Necessário realizar o cadastro de Clinte antes de abrir a conta!')
                         break
 
-                if escolha == 2:
-                    pass
+                if escolha_conta == 2:
+                    cpf_titular = input('Digite o CPF do Titular sem espaços ou caracteres especiais: ')
+                    cpf_encontrado = None
+
+                    for cliente in clientes:
+                        if cliente.cpf == cpf_titular:
+                            cpf_encontrado = cliente
+                            break
+                        if cpf_encontrado:
+                            ContaService.find_by_numero(cpf)
+                        else:
+                            print('Cadastro não encontrado!')
         
         if escolha_inical == 4:
             break
