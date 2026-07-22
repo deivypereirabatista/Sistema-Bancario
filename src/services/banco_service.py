@@ -7,6 +7,7 @@ class ClinteService:
 
     def create(cliente: Cliente):
         ClienteRepository.create(cliente)
+        
 
     def find_all(): 
         return ClienteRepository.find_all()
@@ -25,6 +26,7 @@ class ContaService:
 
     def create(conta: Conta):
         ContaRepository.create(conta)
+        return "Conta criada com Sucesso!"
 
     def find_all():
         return ContaRepository.find_all()

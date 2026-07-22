@@ -1,7 +1,7 @@
 from services.banco_service import ClinteService, ContaService
 from models.cliente import Cliente
 from models.conta import Conta
-from database.banco import gerar_numero_conta, gerar_agencia_conta
+from database.banco import gerar_numero_conta, gerar_agencia_conta, clientes, contas
 
 
 def menu_inicial():
@@ -38,7 +38,7 @@ def iniciar():
                 exibir_menu_cliente()
 
                 escolha_cliente = int(input('Deigite o número correspondente a ação: '))
-
+                #Criar Cadastro para Cliente
                 if escolha_cliente == 1:
                     nome = input('Digite o Nome do Titular da conta: ')
                     cpf = input('Digite o CPF do Titular da conta: ')
@@ -51,13 +51,13 @@ def iniciar():
                         data_nascimento=data_nascimento,
                         endereco=endereco
                     ))
-
+                # Listar todos os Cadastros 
                 if escolha_cliente == 2:
                     clientes = ClinteService.find_all()
 
                     for cliente in clientes:
                         print(cliente)
-                    
+                #Listar Cadastro por Nome        
                 if escolha_cliente == 3:
                     nome = input('Digite o nome do Titular da conta: ')
                     cliente = ClinteService.find_by_nome(nome)
@@ -66,7 +66,7 @@ def iniciar():
                     else:
                         print('Cliente não econtrado.')
 
-                        
+                #Atualizar Cadastro de Cliente        
                 if escolha_cliente == 4:
                     nome_titular = input('Digite o nome do Titular: ')
                     if nome_titular:
@@ -81,14 +81,14 @@ def iniciar():
                             endereco=novo_endereco
                         ))
                     
-
+                #Deletar Cadastro de Cliente
                 if escolha_cliente == 5:
                     nome_titular = input('Digite o nome do Titular da conta: ')
                     if nome_titular:
                         ClinteService.delete(nome_titular)
                     else:
                         print('Cliente não encontrado.')
-
+                # Sair
                 if escolha_cliente == 6: 
                     break
 
@@ -97,10 +97,11 @@ def iniciar():
             while True:
                 exibir_menu_conta()
                 escolha_conta = int(input('Digite o número correspondente a ação: '))
-
+                # Criar conta para Cliente
                 if escolha_conta == 1:
                     nome_titular = input('Digite o nome do Titular: ')
-                    cliente_encontrado = None                  
+                    cliente_encontrado = None
+                    clientes = ClinteService.find_all()                  
                     for cliente in clientes:
                         if cliente.nome == nome_titular:
                             cliente_encontrado = cliente
@@ -114,11 +115,13 @@ def iniciar():
                             agencia=agencia,
                             cliente=cliente_encontrado
                         )
-                        ContaService.create(conta)
+                        mensagem = ContaService.create(conta)
+                        print(mensagem)
+                        
                     else:
                         print('Necessário realizar o cadastro de Clinte antes de abrir a conta!')
                         break
-
+                # Listar Todas as Contas do Clietne
                 if escolha_conta == 2:
                     cpf_titular = input('Digite o CPF do Titular sem espaços ou caracteres especiais: ')
                     cpf_encontrado = None
@@ -131,6 +134,6 @@ def iniciar():
                             ContaService.find_by_numero(cpf)
                         else:
                             print('Cadastro não encontrado!')
-        
+        #Sair Geral
         if escolha_inical == 4:
             break
