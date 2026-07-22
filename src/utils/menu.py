@@ -1,7 +1,7 @@
 from services.banco_service import ClinteService, ContaService
 from models.cliente import Cliente
 from models.conta import Conta
-from database.banco import gerar_numero_conta, gerar_agencia_conta, clientes, contas
+from database.banco import gerar_numero_conta, gerar_agencia_conta
 
 
 def menu_inicial():
@@ -130,10 +130,20 @@ def iniciar():
                         if cliente.cpf == cpf_titular:
                             cpf_encontrado = cliente
                             break
-                        if cpf_encontrado:
-                            ContaService.find_by_numero(cpf)
+                    if cpf_encontrado:
+                        conta_cliente = ContaService.find_by_cliente(cpf_encontrado)
+
+                        if conta_cliente:
+                            print('========== CONTAS DO CLINTE ==========')
+
+                            for conta in conta_cliente:
+                                print(f"Número: {conta.numero}")
+                                print(f"Agência: {conta.agencia}")
+                                print('-'*30)
                         else:
-                            print('Cadastro não encontrado!')
+                            print('Este Cliente não tem contas abertas')
+                    else:
+                        print('Cadastro não encontrado!')
         #Sair Geral
         if escolha_inical == 4:
             break

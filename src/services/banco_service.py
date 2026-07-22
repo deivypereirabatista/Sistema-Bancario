@@ -31,8 +31,11 @@ class ContaService:
     def find_all():
         return ContaRepository.find_all()
 
-    def find_by_numero(numero: str):
-        return ContaRepository.find_by_numero(numero)
+    #def find_by_numero(numero: str):
+    #   return ContaRepository.find_by_numero(numero)
+
+    def find_by_cliente(cliente: Cliente):
+        return ContaRepository.find_by_cliente(cliente)
 
     def delete(numero: str):
         ContaRepository.delete(numero)

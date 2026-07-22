@@ -1,4 +1,5 @@
 from models.conta import Conta
+from models.cliente import Cliente
 from database.banco import contas
 
 class ContaRepository:
@@ -15,6 +16,13 @@ class ContaRepository:
                 return conta
             
         return None
+
+    def find_by_cliente(cliente: Cliente):
+        conta_cliente = []
+        for conta in contas:
+            if conta.cliente == cliente:
+                conta_cliente.append(conta)
+        return conta_cliente
 
     def delete(numero:str):
         for index, conta in enumerate(contas):
