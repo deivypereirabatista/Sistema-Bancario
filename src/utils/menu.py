@@ -144,6 +144,10 @@ def iniciar():
                             print('Este Cliente não tem contas abertas')
                     else:
                         print('Cadastro não encontrado!')
+
+
+                if escolha_conta == 5:
+                    break
         #Sair Geral
         if escolha_inical == 4:
             break
